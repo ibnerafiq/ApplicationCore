@@ -1,33 +1,50 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Data.Core.BaseService
 {
-    blic class IdentityResult<T> : IdentityResult
+    public class IdentityResult<T> : IdentityResult
     {
         public T Data { get; set; }
 
         public IdentityResult(bool success)
-            : base(success)
+         
         {
-
+            this.Succeeded = success;
         }
 
         public IdentityResult(params string[] errors)
-            : base(errors)
+          //  : base(errors)
         {
-
+            errors.ToList().ForEach(aa =>
+            {
+                
+                this.Errors.ToList().Add(new IdentityError { Code = aa, Description = aa });
+            });
+            
         }
         public IdentityResult(IEnumerable<string> errors)
-            : base(errors)
+            //: base(errors)
         {
+            errors.ToList().ForEach(aa =>
+            {
 
+                this.Errors.ToList().Add(new IdentityError { Code = aa, Description = aa });
+            });
         }
 
         public void AddErrors(ModelStateDictionary ModelState)
         {
-            Errors.ToList().AddRange(ModelState.Values.SelectMany(v => v.Errors).Select(xx => xx.ErrorMessage).ToList());
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(aa => aa.ErrorMessage).ToList();
+            errors.ForEach(aa =>
+            {
+                this.Errors.ToList().Add(new IdentityError { Code = aa, Description = aa });
+            });
+            
         }
     }
 }
