@@ -7,7 +7,6 @@
   <ItemGroup>
     <PackageReference Include="automapper" Version="9.0.0" />
     <PackageReference Include="EPPlus" Version="4.5.3.2" />
-    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Snickler.EFCore" Version="1.0.3" />

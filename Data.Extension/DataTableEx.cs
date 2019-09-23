@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Data.Extension
 {
     public static class DataTableEx
@@ -22,7 +21,7 @@ namespace Data.Extension
                                                .Where(propertyInfo => propertyInfo.PropertyType.Namespace.Equals("System"))
                                                .ToArray();
 
-            return dt.AsEnumerable().Select(row =>
+            return dt.Rows.Cast<DataRow>().Select(row =>
             {
                 var objT = Activator.CreateInstance<T>();
 
@@ -60,7 +59,7 @@ namespace Data.Extension
                                                .Where(propertyInfo => propertyInfo.PropertyType.Namespace.Equals("System"))
                                                .ToArray();
 
-            return dt.AsEnumerable().Select(row =>
+            return dt.Rows.Cast<DataRow>().Select(row =>
             {
                 var objT = Activator.CreateInstance<T>();
 
@@ -101,7 +100,8 @@ namespace Data.Extension
                                                propertyInfo.PropertyType.Namespace.Equals("System"))
                                                .ToArray();
 
-            return dt.AsEnumerable().Select(row =>
+            //return dt.AsEnumerable().Select(row =>
+            return dt.Rows.Cast<DataRow>().Select(row => 
             {
                 var objT = Activator.CreateInstance<T>();
 

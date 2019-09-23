@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Data.Core.Extension;
 using Microsoft.EntityFrameworkCore;
 using Snickler.EFCore;
